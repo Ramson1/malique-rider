@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
-  Loader2,
   RefreshCw,
   History,
   Calendar,
@@ -11,6 +10,7 @@ import {
 import { api } from "@/lib/api/client";
 import { RiderLayout } from "@/components/rider-layout";
 import { DeliveryCard } from "@/components/delivery-card";
+import { SkeletonDeliveryList } from "@/components/skeleton";
 import { mapDeliveries, type Delivery } from "@/lib/map-delivery";
 
 function HistoryInner() {
@@ -115,9 +115,7 @@ function HistoryInner() {
 
         {/* Content */}
         {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
-          </div>
+          <SkeletonDeliveryList count={4} />
         ) : deliveries.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-4">
@@ -154,8 +152,8 @@ export default function HistoryPage() {
     <Suspense
       fallback={
         <RiderLayout title="Delivery History">
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+          <div className="px-4 py-5">
+            <SkeletonDeliveryList count={4} />
           </div>
         </RiderLayout>
       }

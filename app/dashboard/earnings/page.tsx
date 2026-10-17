@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import {
-  Loader2,
   RefreshCw,
   Wallet,
   TrendingUp,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import { api } from "@/lib/api/client";
 import { RiderLayout } from "@/components/rider-layout";
+import { SkeletonStats, SkeletonDeliveryList } from "@/components/skeleton";
 
 interface EarningsSummary {
   today: number;
@@ -60,8 +60,9 @@ export default function EarningsPage() {
   if (loading) {
     return (
       <RiderLayout title="Earnings">
-        <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+        <div className="px-4 py-5 space-y-6">
+          <SkeletonStats />
+          <SkeletonDeliveryList count={3} />
         </div>
       </RiderLayout>
     );

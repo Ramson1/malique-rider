@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { Loader2, RefreshCw, Package, Bell } from "lucide-react";
+import { RefreshCw, Package, Bell } from "lucide-react";
 import { api } from "@/lib/api/client";
 import { RiderLayout } from "@/components/rider-layout";
+import { SkeletonDeliveryList } from "@/components/skeleton";
 import {
   DeliveryCard,
   type StatusUpdate,
@@ -127,9 +128,7 @@ export default function ActiveDeliveriesPage() {
 
         {/* Content */}
         {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
-          </div>
+          <SkeletonDeliveryList count={3} />
         ) : deliveries.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mb-4">

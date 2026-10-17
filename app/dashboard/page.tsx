@@ -7,7 +7,6 @@ import {
   CheckCircle,
   Clock,
   Wallet,
-  Loader2,
   RefreshCw,
   ArrowRight,
 } from "lucide-react";
@@ -15,6 +14,7 @@ import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api/client";
 import { RiderLayout } from "@/components/rider-layout";
 import { StatBar } from "@/components/stat-bar";
+import { SkeletonText, SkeletonStats, SkeletonDeliveryList } from "@/components/skeleton";
 
 interface DashboardStats {
   todayDeliveries: number;
@@ -62,8 +62,10 @@ export default function DashboardPage() {
   if (authLoading || loading) {
     return (
       <RiderLayout>
-        <div className="flex items-center justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
+        <div className="px-4 py-5 space-y-6">
+          <SkeletonText lines={2} className="w-44" />
+          <SkeletonStats />
+          <SkeletonDeliveryList count={2} />
         </div>
       </RiderLayout>
     );
